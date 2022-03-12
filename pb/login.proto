@@ -1,0 +1,51 @@
+syntax = "proto3";
+package login;
+option go_package = "./msg";
+import "base.proto";
+
+// 登录请求
+message LoginAccPasswdReq {
+  base.Req  req = 1;
+  string    account  = 2;
+  string    passwd    = 3;
+}
+
+// 登录返回
+message LoginAccPasswdResp {
+  base.Resp   status = 1;
+  string      token  = 2;
+  string      addr   = 3;
+}
+
+// 注册请求
+message RegisterMailReq {
+  base.Req    req = 1;
+  string      name = 2;
+  string      nickname = 3;
+  int32       age = 4;
+  int32       sex		= 5;
+  string      invertCode = 6;
+  string      mail = 7;
+  string      phone = 8;
+  string      avatar = 9;
+  // 密码
+  string      passwd = 10;
+  // 验证码
+  string      vcode = 11;
+}
+
+// 注册响应
+message RegisterMailResp {
+  base.Resp   status = 1;
+}
+
+// 换取Web的token请求
+message GetWebTokenReq {
+  base.Req   req = 1;
+}
+
+// 换取Web的token响应
+message GetWebTokenResp {
+  base.Resp   resp = 1;
+  string      token = 2;
+}

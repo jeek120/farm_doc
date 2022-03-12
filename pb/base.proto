@@ -1,0 +1,20 @@
+syntax = "proto3";
+package base;
+option go_package = "./msg";
+
+// 公共请求头
+message Req {
+  // 请求id
+  // 服务器偶数递增，客户端奇数递增
+  uint32    no  = 1;
+}
+
+// 公共响应头
+message Resp {
+  int32     code = 1;
+  string    msg = 2;
+}
+
+// 公共通知头
+message Notice {
+}

@@ -1,0 +1,34 @@
+syntax = "proto3";
+package system;
+option go_package = "./msg";
+import "base.proto";
+
+// 弹出框
+message MessageResp {
+  base.Resp resp = 1;
+  // 错误码
+  // 1-显示ok，2-显示cancel
+  int32    code = 2;
+  // 倒计时
+  // 当大于0时，会出现倒计时x秒后才可以点
+  int32     x     = 3;
+  string    msg   = 4;
+}
+
+// 确认框
+message ConfirmResp {
+  base.Resp resp = 1;
+  // ok 按钮的文字显示
+  string   ok   = 2;
+  // 倒计时
+  // 当大于0时，会出现倒计时x秒后才可以点
+  int32   x     = 3;
+  string    msg   = 4;
+}
+
+// 确认点击确认框的ok按钮
+message ConfirmOkBtnReq {
+  base.Req  req = 1;
+  // 请求id
+  uint32    req_no    =2;
+}
