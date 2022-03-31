@@ -23,6 +23,87 @@
 ## Notice
 
 > ### 公共通知头
+# blindbox
+
+## LandOpenBlindReq
+
+> ### 开启盲盒请求
+
+> ### 协议号
+> `2271763913`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |req|[Req](#Req)|||
+> |id|int64|盲盒id||
+## LandOpenBlindResp
+
+> ### 开启盲盒结果
+
+> ### 协议号
+> `2271763914`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |resp|[Resp](#Resp)|||
+> |t|int64|盲盒类型||
+> |land_id|int64|土地id||
+# land
+
+## UnlockLandReq
+
+> ### 解锁土地请求
+
+> ### 协议号
+> `539913625`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |req|[Req](#Req)|||
+> |land_id|int64|||
+## UnlockLandResp
+
+> ### 解锁土地返回
+
+> ### 协议号
+> `539913625`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |req|[Req](#Req)|||
+> |land_id|int64|||
+## OperateLandReq
+
+> ### 操作土地请求
+
+> ### 协议号
+> `554839481`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |req|[Req](#Req)|||
+> |land_id|int64|||
+> |operate_type|enum|||
+## OperateLandResp
+
+> ### 操作土地返回
+
+> ### 协议号
+> `554839482`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |resp|[Resp](#Resp)|||
+> |land_id|int64|||
+> |operate_type|enum|||
+# livestock
+
 # login
 
 ## LoginAccPasswdReq
@@ -38,6 +119,7 @@
 > |req|[Req](#Req)|||
 > |account|string|||
 > |passwd|string|||
+> |platform|int32|||
 ## LoginAccPasswdResp
 
 > ### 登录返回
@@ -49,6 +131,7 @@
 > |字段|类型|中文|描述|
 > |---|---|---|---|
 > |status|[Resp](#Resp)|||
+> |player_id|int64|||
 > |token|string|||
 > |addr|string|||
 ## RegisterMailReq
@@ -62,6 +145,7 @@
 > |字段|类型|中文|描述|
 > |---|---|---|---|
 > |req|[Req](#Req)|||
+> |player_id|int64|||
 > |name|string|||
 > |nickname|string|||
 > |age|int32|||
@@ -95,6 +179,7 @@
 > |字段|类型|中文|描述|
 > |---|---|---|---|
 > |resp|[Resp](#Resp)|||
+> |player_id|int64|||
 > |name|string|||
 > |nickname|string|||
 > |age|int32|||
@@ -157,8 +242,101 @@
 > |---|---|---|---|
 > |resp|[Resp](#Resp)|||
 > |token|string|||
+# market
+
+## GoodItem
+
+> ### 商品列表
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |type_no|int32|||
+> |name|int32|如果字段为空，则从配置文件中获取名字||
+> |price|int64|售卖价格||
+> |img|string|预览图||
+## GoodListReq
+
+> ### 市场列表请求
+
+> ### 协议号
+> `802074425`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |req|[Req](#Req)|||
+> |last_id|int64|||
+## GoodListResp
+
+> ### 
+
+> ### 协议号
+> `802074426`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |resp|[Resp](#Resp)|||
+> |item|[GoodItem](#GoodItem)|||
 # system
 
+## ResConfigReq
+
+> ### 获取资源配置
+
+> ### 协议号
+> `1056715489`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |req|[Req](#Req)|||
+## ResRecord
+
+> ### 配置信息属性
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |key|string|||
+> |s_val|string|||
+> |i_val|int64|||
+## ResRecords
+
+> ### 配置信息记录
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |records|[ResRecord](#ResRecord)|||
+## ResConfigResp
+
+> ### 获取配置文件返回信息
+
+> ### 协议号
+> `1056715490`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |resp|[Resp](#Resp)|||
+> |data|[DataEntry](#DataEntry)|||
+## NoticeResp
+
+> ### 消息提示
+
+> ### 协议号
+> `2611204202`
+
+> ### 协议详情
+> |字段|类型|中文|描述|
+> |---|---|---|---|
+> |resp|[Resp](#Resp)|||
+> |position|int32|位置
+ 0-根据用户或客户端配置 1-top 2-bottom||
+> |icon|int32|0-没有icon||
+> |msg|string|||
 ## MessageResp
 
 > ### 弹出框
@@ -172,8 +350,9 @@
 > |resp|[Resp](#Resp)|||
 > |code|int32|错误码
  1-显示ok，2-显示cancel||
-> |x|int32|倒计时
- 当大于0时，会出现倒计时x秒后才可以点||
+> |icon|int32|0-没有icon||
+> |s|int32|倒计时
+ 当大于0时，会出现倒计时s秒后才可以点||
 > |msg|string|||
 ## ConfirmResp
 
@@ -187,6 +366,7 @@
 > |---|---|---|---|
 > |resp|[Resp](#Resp)|||
 > |ok|string|ok 按钮的文字显示||
+> |icon|int32|0-没有icon||
 > |x|int32|倒计时
  当大于0时，会出现倒计时x秒后才可以点||
 > |msg|string|||
@@ -220,14 +400,25 @@
   "ConfirmResp": 429080082,
   "GetWebTokenReq": 1348918585,
   "GetWebTokenResp": 1348918586,
+  "GoodListReq": 802074425,
+  "GoodListResp": 802074426,
+  "LandOpenBlindReq": 2271763913,
+  "LandOpenBlindResp": 2271763914,
   "LoginAccPasswdReq": 3298260953,
   "LoginAccPasswdResp": 3298260954,
   "LoginTokenReq": 1467768201,
   "LoginTokenResp": 1467768202,
   "LogoutResp": 765576026,
   "MessageResp": 1269895266,
+  "NoticeResp": 2611204202,
+  "OperateLandReq": 554839481,
+  "OperateLandResp": 554839482,
   "PingReq": 68964473,
   "RegisterMailReq": 4282977073,
-  "RegisterMailResp": 4282977074
+  "RegisterMailResp": 4282977074,
+  "ResConfigReq": 1056715489,
+  "ResConfigResp": 1056715490,
+  "UnlockLandReq": 539913625,
+  "UnlockLandResp": 539913625
 }
 ```
